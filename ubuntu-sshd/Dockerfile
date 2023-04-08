@@ -52,8 +52,8 @@ RUN apt update && apt install -y build-essential libssl-dev zlib1g-dev \
     apt clean
 
 RUN curl https://pyenv.run | bash
-RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshrc && \
-    echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshrc && \
-    echo 'eval "$(pyenv init -)"' >> ~/.zshrc
-RUN source /root/.zshrc && pyenv install 3.10.10 && pyenv global 3.10.10
+RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshenv && \
+    echo 'command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.zshenv && \
+    echo 'eval "$(pyenv init -)"' >> ~/.zshenv
+RUN source /root/.zshenv && pyenv install 3.10.10 && pyenv global 3.10.10
 
