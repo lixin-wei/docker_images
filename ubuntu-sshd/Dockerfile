@@ -42,8 +42,6 @@ RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master
 # oh-my-zsh config
 COPY zshrc /root/.zshrc
 SHELL ["/usr/bin/zsh", "-c"]
-# vimrc
-RUN wget https://raw.githubusercontent.com/amix/vimrc/master/vimrcs/basic.vim -O /root/.vimrc
 
 #pyenv
 RUN apt update && apt install -y build-essential libssl-dev zlib1g-dev \
@@ -57,3 +55,12 @@ RUN echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.zshenv && \
     echo 'eval "$(pyenv init -)"' >> ~/.zshenv
 RUN source /root/.zshenv && pyenv install 3.10.10 && pyenv global 3.10.10
 
+# vimrc
+RUN git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime && \
+    sh ~/.vim_runtime/install_awesome_vimrc.sh && \ 
+    echo 'set number' >> ~/.vim_runtime/my_configs.vim
+# git configs
+RUN git config --global user.name "Lixin Wei" && \
+    git config --global user.email 'wlx65005@gmail.com' && \
+    git config --global merge.conflictstyle diff3 && \
+    git config --global core.editor "vim"
