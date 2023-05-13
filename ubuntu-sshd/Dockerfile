@@ -64,3 +64,7 @@ RUN git config --global user.name "Lixin Wei" && \
     git config --global user.email 'wlx65005@gmail.com' && \
     git config --global merge.conflictstyle diff3 && \
     git config --global core.editor "vim"
+
+# Additional libs
+RUN apt update && apt install -y psmisc && \
+    apt clean
